@@ -34,11 +34,12 @@ void setnonblocking(int sock)
     }
 }
 
+char line[MAXLINE];
+
 int main(int argc, char* argv[])
 {
     int i, maxi, listenfd, connfd, sockfd,epfd,nfds, portnumber;
     ssize_t n;
-    char line[MAXLINE];
     socklen_t clilen;
 
 
@@ -111,15 +112,9 @@ int main(int argc, char* argv[])
                 char *str = inet_ntoa(clientaddr.sin_addr);
                 cout << "accapt a connection from " << str << endl;
                 //设置用于读操作的文件描述符
-
                 ev.data.fd=connfd;
                 //设置用于注测的读操作事件
-
                 ev.events=EPOLLIN|EPOLLET;
-                //ev.events=EPOLLIN;
-
-                //注册ev
-
                 epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&ev);
             }
             else if(events[i].events&EPOLLIN)//如果是已经连接的用户，并且收到数据，那么进行读入。
