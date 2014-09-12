@@ -4,6 +4,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <memory.h>
+#include <time.h>
+#include <unistd.h>
 #include <errno.h>
 
 const char* HOST = "127.0.0.1";
@@ -49,7 +51,10 @@ int main(int argc, char* argv[])
 	}
 
 	const char* msg = "this is not a hello world.";
-	send(sock_fd, msg, sizeof(msg), 0);
+	printf("ryf send: %s %d \n", msg, strlen(msg));
+	send(sock_fd, msg, strlen(msg), 0);
+
+	sleep(3000);
 	
 	return 0;
 }
