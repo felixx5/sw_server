@@ -56,10 +56,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-
-
     //声明epoll_event结构体的变量,ev用于注册事件,数组用于回传要处理的事件
-
     struct epoll_event ev,events[20];
     //生成用于处理accept的epoll专用的文件描述符
 
