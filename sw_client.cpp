@@ -38,7 +38,7 @@ int init()
 		return -1;
 	}
 
-	return 0;
+	return sock_fd;
 }
 
 int main(int argc, char* argv[])
@@ -52,9 +52,11 @@ int main(int argc, char* argv[])
 
 	const char* msg = "this is not a hello world.";
 	printf("ryf send: %s %d \n", msg, strlen(msg));
-	send(sock_fd, msg, strlen(msg), 0);
+	int n = send(sock_fd, msg, strlen(msg), 0);
+	printf("send n is: %d\n", n);
+	perror("send error: ");
 
-	sleep(3000);
+	//sleep(3000);
 	
 	return 0;
 }
